@@ -1,0 +1,195 @@
+<style>
+    .ok {
+        background-color:green;
+    }
+    .error {
+        background-color:red;
+    }
+  
+   table {
+		font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+		text-align: center;
+		border-collapse: collapse;
+		border-spacing: 5px;
+		background: #E1E3E0;
+		border-radius: 20px;
+		width: 100%;
+	}
+	th {
+		font-size: 22px;
+		font-weight: 300;
+		padding: 12px 10px;
+		border-bottom: 2px solid #F56433;
+		color: #F56433;
+	}
+	tbody tr:nth-child(2) {
+	border-bottom: 2px solid #F56433;
+	}
+	td {
+	padding: 10px;
+	color: #8D8173;
+	}
+</style>
+<p>Индекс:</p>
+<input id="site" onkeyup="check_site();">
+<p>Адрес электронной почты:</p>
+<input id="adress" onkeyup="check_adress();">
+<p>ФИО (Петров В. В.):</p>
+<input id="names" onkeyup="check_names(this);">
+<p>Номер телефона: (Х-ХХХ-ХХХ-ХХХХ)</p>
+<input id="telefon" onkeyup="check_telefon(this);">
+<p>Автомобильный номер: (В365КМ 66)</p>
+<input id="nomer" onkeyup="check_number(this);">
+<p>Дата рождения: (01/02/2001)</p>
+<input id="denro" onkeyup="check_denro(this);">
+
+<p><button id="button" onclick="add()" disabled>Добавить запись</button></p>
+<p><button id="button2" onclick="del()">Очистить поля</button></p>
+
+<table id="table">
+<tbody>
+<tr>
+<td>Индекс</td>
+<td>Адрес электронной почты</td>
+<td>ФИО</td>
+<td>Номер телефона</td>
+<td>Автомобильный номер</td>
+<td>День рождения</td>
+</tr>
+<tr>
+ 
+</tr>
+</tbody>
+</table>
+ 
+ 
+<script>
+ 
+    function buttonable() {
+        var site = document.getElementById("site").classList;
+        var adress = document.getElementById("adress").classList;
+        var names = document.getElementById("names").classList;
+		var telefon = document.getElementById("telefon").classList;
+		var nomer = document.getElementById("nomer").classList;
+		var denro = document.getElementById("denro").classList;
+        if(site == "ok" && adress == "ok" && names == "ok" && telefon == "ok" && denro == "ok" && nomer == "ok")
+            document.getElementById("button").disabled = false;
+    }
+    
+    function check_names(ely) {
+        var s2=ely.value;
+        var rem = /^[А-Я][а-я]{4,20}\s[А-Я]\.\s[А-Я]\.$/;
+        if (rem.test(s2)) {
+            console.log("имя указано верно");
+            ely.classList.add("ok");
+            ely.classList.remove("error");
+        } else {
+            console.log("неправильно введено имя");
+            ely.classList.add("error");
+            ely.classList.remove("ok");
+        }
+        buttonable();
+    }
+    
+    
+    function check_site() {
+        var el=document.getElementById('site');
+        var s=document.getElementById("site").value;
+        var reg = /^\d{6}$/;
+        if (reg.test(s)) {
+            console.log("индекс указан верно");
+            el.classList.add("ok");
+            el.classList.remove("error");
+        } else {
+            console.log("неправильно введен индекс");
+            el.classList.add("error");
+            el.classList.remove("ok");
+        }
+        buttonable();
+    }
+    
+    
+    function check_adress() {
+        var ell=document.getElementById('adress');
+        var s1=document.getElementById("adress").value;
+        var reg = /^[a-zA-Z]{5,20}\@\w{1,10}\.\w{2,5}$/;
+        if (reg.test(s1)) {
+            console.log("адрес указан верно");
+            ell.classList.add("ok");
+            ell.classList.remove("error");
+        } else {
+            console.log("неправильно введен адрес");
+            ell.classList.add("error");
+            ell.classList.remove("ok");
+        }
+        buttonable();
+    }
+    
+    function check_telefon(ely) {
+		var s2=ely.value;
+		var reg = /^\d{1}\-\d{3}\-\d{3}\-\d{4}$/;
+		if (reg.test(s2)) {
+			console.log("номер указан верно");
+			ely.classList.add("ok");
+			ely.classList.remove("error");
+		} else {
+			console.log("неправильно введен номер");
+			ely.classList.add("error");
+			ely.classList.remove("ok");
+		}
+		buttonable();
+	}
+	
+	function check_number(ely) {
+		var s2=ely.value;
+		var reg = /^[А, В, Е, К, М, Н, О, Р, С, Т, У, Х]{1}\d{3}[А, В, Е, К, М, Н, О, Р, С, Т, У, Х]{2}\s\d{2,3}$/;
+		if (reg.test(s2)) {
+			console.log("номер указан верно");
+			ely.classList.add("ok");
+			ely.classList.remove("error");
+		} else {
+			console.log("неправильно введен автомобильный номер");
+			ely.classList.add("error");
+			ely.classList.remove("ok");
+		}
+		buttonable();
+	}
+	
+	function check_denro(ely) {
+		var s2=ely.value;
+		var reg = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+		if (reg.test(s2)) {
+			console.log("номер указан верно");
+			ely.classList.add("ok");
+			ely.classList.remove("error");
+		} else {
+			console.log("неправильно введен автомобильный номер");
+			ely.classList.add("error");
+			ely.classList.remove("ok");
+		}
+		buttonable();
+	}
+	
+    function add() {
+    document.getElementById("button").disabled = true;
+   
+        var table = document.getElementById("table");
+        var row = table.insertRow(table.rows.length);
+        row.insertCell(0).innerHTML = document.getElementById('site').value;
+        row.insertCell(1).innerHTML = document.getElementById('adress').value;
+        row.insertCell(2).innerHTML = document.getElementById('names').value;
+		row.insertCell(3).innerHTML = document.getElementById('telefon').value;
+		row.insertCell(4).innerHTML = document.getElementById('nomer').value;
+		row.insertCell(5).innerHTML = document.getElementById('denro').value;
+     
+    }   
+	 function del() {
+   
+      document.getElementById('site').value = "";
+	  document.getElementById('adress').value = "";
+	  document.getElementById('names').value = "";
+	  document.getElementById('telefon').value = "";
+	  document.getElementById('nomer').value = "";
+	  document.getElementById('denro').value = "";
+    }   
+</script>
